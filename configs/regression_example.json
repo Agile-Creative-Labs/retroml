@@ -1,0 +1,23 @@
+{
+  "dataset": {
+    "path": "data/houses.csv",
+    "target_column": "price"
+  },
+  "problem_type": "regression",
+  "preprocessing": {
+    "impute_missing": "median",
+    "scale_features": true
+  },
+  "model": {
+    "auto_select": true,
+    "options": [
+      "linear_regression",
+      "random_forest",
+      "xgboost"
+    ]
+  },
+  "output": {
+    "save_dir": "results/regression/",
+    "format": "pickle"
+  }
+}

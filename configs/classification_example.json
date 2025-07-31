@@ -1,0 +1,23 @@
+{
+  "dataset": {
+    "path": "data/customers.csv",
+    "target_column": "churn"
+  },
+  "problem_type": "classification",
+  "preprocessing": {
+    "impute_missing": "mean",
+    "scale_features": true
+  },
+  "model": {
+    "auto_select": true,
+    "options": [
+      "logistic_regression",
+      "random_forest",
+      "xgboost"
+    ]
+  },
+  "output": {
+    "save_dir": "results/classification/",
+    "format": "pickle"
+  }
+}

@@ -1,0 +1,10 @@
+============================================================
+🎮 RETROML EVALUATION REPORT 🎮
+============================================================
+Timestamp: 2025-07-31 16:26:01
+Problem Type: regression
+Dataset: data/houses.csv
+Best Model: LinearRegression
+------------------------------------------------------------
+Mean Squared Error: 321667066.8432
+R² Score: 0.9367
