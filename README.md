@@ -20,6 +20,14 @@ Welcome to RetroML! A nostalgic, configuration-driven ML pipeline that brings th
    ```
 ## Run the Demo for RetroML Classification Demo
 
+Demo Focus:
+----------
+The included classification demo specifically demonstrates:
+- Customer Churn Prediction (Binary Classification)
+  - Predicts whether customers will leave (`churn=1`) or stay (`churn=0`)
+  - Uses features like contract type, monthly charges, and tenure
+  - Showcases model interpretability (feature importance)
+
 1. **Run the interactive demo**
   ```bash
     python retroml_demo.py
