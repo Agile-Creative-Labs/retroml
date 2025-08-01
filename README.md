@@ -171,7 +171,9 @@ Want to add new algorithms or preprocessing steps? The modular design makes it e
 ## License
 
 This project is open source. Feel free to modify and distribute!
+MIT License
 
 ---
 
 🎮 **RetroML** - Bringing 90s vibes to modern ML! 🎮
+Made with ❤️ by Agile Creative Labs
