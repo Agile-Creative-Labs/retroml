@@ -1,6 +1,7 @@
 # RetroML 
 
-Welcome to RetroML! A nostalgic, configuration-driven ML pipeline that brings the radical vibes of the 90s to modern machine learning.
+   Welcome to **RetroML**, a nostalgic, config-driven machine learning pipeline that brings the radical vibes of the '90s to modern AutoML workflows.  Run interpretable ML models through JSON configs or interactively    via UI demos — no coding required!
+
 
 ## Quick Start
 
