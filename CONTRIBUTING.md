@@ -10,3 +10,7 @@ cd retroml
 
 # Install power-ups (dependencies)
 pip install -e ".[dev]"
+
+# Commit message example
++ [FEAT] Added rad new XGBoost config 
++ [FIX] #42 - Fixed loading screen animation
