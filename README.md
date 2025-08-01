@@ -18,6 +18,26 @@ Welcome to RetroML! A nostalgic, configuration-driven ML pipeline that brings th
    ```bash
    python retroml_ui.py
    ```
+## Run the Demo for RetroML Classification Demo
+
+1. **Run the interactive demo**
+  ```bash
+    python retroml_demo.py
+  ```
+2. **Analyze the model in detail**
+  ```bash
+    python3 retroml_model_analyzer.py
+  ```    
+3. **Ensure that you flask installed**
+    ```bash
+      pip install flask
+    ```    
+4. **Launch the web application**
+  ```bash
+    python3 retroml_web_demo.py
+  ```
+
+# Then open http://localhost:5000
 
 ## Project Structure
 
