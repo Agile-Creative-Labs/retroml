@@ -1,0 +1,67 @@
+================================================================================
+🎮 RETROML MODEL ANALYSIS REPORT 🎮
+================================================================================
+Generated: 2025-07-31 17:22:34
+Model Type: RandomForestClassifier
+Problem Type: classification
+Dataset: data/customers.csv
+Target Column: churn
+
+================================================================================
+📊 MODEL CHARACTERISTICS
+================================================================================
+Model Parameters:
+  bootstrap: True
+  ccp_alpha: 0.0
+  class_weight: None
+  criterion: gini
+  max_depth: None
+  max_features: sqrt
+  max_leaf_nodes: None
+  max_samples: None
+  min_impurity_decrease: 0.0
+  min_samples_leaf: 1
+  min_samples_split: 2
+  min_weight_fraction_leaf: 0.0
+  monotonic_cst: None
+  n_estimators: 100
+  n_jobs: None
+  oob_score: False
+  random_state: 42
+  verbose: 0
+  warm_start: False
+
+Feature Importances:
+  age: 0.0587
+  tenure_months: 0.0579
+  monthly_charges: 0.2600
+  total_charges: 0.2015
+  contract_type: 0.0639
+  payment_method: 0.3041
+  internet_service: 0.0200
+  online_security: 0.0152
+  tech_support: 0.0088
+
+================================================================================
+🎯 GENERATED VISUALIZATIONS
+================================================================================
+The following visualization files have been created:
+  • feature_importance.png - Feature importance analysis
+  • data_distributions.png - Data distribution plots
+  • correlation_heatmap.png - Feature correlation matrix
+  • confusion_matrix.png - Model performance matrix
+  • roc_curve.png - ROC curve analysis
+
+================================================================================
+💡 INSIGHTS & RECOMMENDATIONS
+================================================================================
+• Most important feature appears to be feature #5
+• Review feature importance plots to understand key drivers
+• Check correlation heatmap for multicollinearity issues
+• Monitor ROC curve for model discrimination ability
+• Consider feature engineering based on distribution plots
+
+================================================================================
+🚀 MODEL DEPLOYMENT READY!
+Use the RetroMLPredictor class to make predictions in production.
+================================================================================

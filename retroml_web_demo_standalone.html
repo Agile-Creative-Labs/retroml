@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroML - Demo Mode</title>
+    <style>
+        /* Same CSS as above but for standalone demo */
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #00ff41;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            background: rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+        
+        .title {
+            font-size: 2.5em;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #ff6b6b;
+            text-shadow: 0 0 5px #ff6b6b;
+        }
+        
+        .demo-panel {
+            padding: 30px;
+            border: 2px solid #4ecdc4;
+            border-radius: 10px;
+            background: rgba(78, 205, 196, 0.1);
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.2);
+            text-align: center;
+        }
+        
+        .demo-text {
+            font-size: 1.3em;
+            color: #ffeb3b;
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #00ff41;
+            font-family: 'Share Tech Mono', monospace;
+            color: #00ff41;
+            margin: 10px 0;
+        }
+        
+        .retro-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="retro-grid"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="title">🎮 RETROML WEB DEMO 🎮</div>
+            <div class="subtitle">Retro-Style ML Web Interface</div>
+        </div>
+        
+        <div class="demo-panel">
+            <div class="demo-text">🚀 Ready to Launch Web Application!</div>
+            
+            <div class="instructions">
+                <h3 style="color: #4ecdc4; margin-bottom: 15px;">📋 Setup Instructions:</h3>
+                
+                <p style="margin-bottom: 10px;"><strong>1. Install Flask:</strong></p>
+                <div class="code-block">pip install flask</div>
+                
+                <p style="margin-bottom: 10px;"><strong>2. Run the web application:</strong></p>
+                <div class="code-block">python retroml_web_demo.py</div>
+                
+                <p style="margin-bottom: 10px;"><strong>3. Open your browser and go to:</strong></p>
+                <div class="code-block">http://localhost:5000</div>
+                
+                <h3 style="color: #4ecdc4; margin: 20px 0 15px 0;">✨ Features:</h3>
+                <ul style="color: #ffeb3b; text-align: left;">
+                    <li>🎯 Real-time churn prediction</li>
+                    <li>📊 Interactive form with customer data</li>
+                    <li>🎮 Full retro 90s styling</li>
+                    <li>📈 Confidence scores and probabilities</li>
+                    <li>💡 Automated recommendations</li>
+                    <li>📱 Mobile-responsive design</li>
+                </ul>
+                
+                <h3 style="color: #4ecdc4; margin: 20px 0 15px 0;">🔧 Prerequisites:</h3>
+                <ul style="color: #ffeb3b; text-align: left;">
+                    <li>✅ Trained classification model in results/classification/</li>
+                    <li>✅ Flask installed (pip install flask)</li>
+                    <li>✅ All RetroML dependencies</li>
+                </ul>
+            </div>
+            
+            <div style="background: rgba(255, 107, 107, 0.2); border: 2px solid #ff6b6b; border-radius: 10px; padding: 15px; margin-top: 20px;">
+                <div style="color: #ff6b6b; font-weight: bold;">⚠️ Demo Mode Active</div>
+                <div style="color: #ffffff; margin-top: 10px;">
+                    This is a static preview. Run the Python script to start the interactive web server!
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add some retro effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add glitch effect to title
+            const title = document.querySelector('.title');
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    title.style.textShadow = '2px 0 #ff6b6b, -2px 0 #4ecdc4';
+                    setTimeout(() => {
+                        title.style.textShadow = '0 0 10px #00ffff';
+                    }, 100);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+    

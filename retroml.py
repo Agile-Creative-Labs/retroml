@@ -2,6 +2,103 @@
 """
 RetroML - A 90s-Style Automated Machine Learning Pipeline
 =========================================================
+
+Description:
+------------
+A configuration-driven machine learning pipeline with a nostalgic 90s interface.
+Automates the complete ML workflow from data loading to model deployment with
+a retro aesthetic. Supports classification and regression tasks with multiple
+algorithms and preprocessing options.
+
+Key Features:
+------------
+- JSON configuration for easy setup
+- Automated data preprocessing (missing values, scaling, encoding)
+- Multiple model training with auto-selection
+- Comprehensive evaluation reports
+- Retro-style console interface with ASCII art
+- Model serialization for deployment
+
+Usage:
+------
+python retroml.py <config.json>
+
+Example Config:
+--------------
+{
+    "dataset": {
+        "path": "data.csv",
+        "target_column": "target"
+    },
+    "problem_type": "classification",
+    "preprocessing": {
+        "impute_missing": "mean",
+        "scale_features": true
+    },
+    "model": {
+        "auto_select": true,
+        "options": ["logistic_regression", "random_forest"]
+    },
+    "output": {
+        "save_dir": "results/",
+        "format": "pickle"
+    }
+}
+
+Dependencies:
+------------
+Required:
+- pandas
+- numpy
+- scikit-learn
+
+Optional:
+- xgboost (for XGBoost models)
+- rich (for enhanced console output)
+
+Classes:
+--------
+1. RetroMLPipeline - Main pipeline class that handles:
+   - Configuration loading
+   - Data preprocessing
+   - Model training
+   - Evaluation
+   - Model saving
+
+2. RetroMLConfig - Configuration dataclass that validates and stores:
+   - Dataset information
+   - Problem type
+   - Preprocessing settings
+   - Model options
+   - Output settings
+
+Methods:
+--------
+- load_data() - Loads dataset from file
+- preprocess_data() - Handles missing values, scaling, encoding
+- train_models() - Trains and selects best model
+- evaluate_model() - Generates evaluation reports
+- save_model() - Serializes trained model
+- run_pipeline() - Executes complete workflow
+
+Version:
+--------
+v0.1.0
+
+License:
+--------
+MIT License
+
+Copyright (c) 2025 Agile Creative Labs Inc.
+
+Maintainers:
+------------
+    retroml-opensource@agilecreativelabs.com>
+
+See Also:
+---------
+- GitHub: https://github.com/Agile-Creative-Labs/retroml
+- Documentation: https://agile-creative-labs.github.io/retroml
 """
 
 import json
@@ -22,6 +119,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.metrics import classification_report, confusion_matrix, mean_squared_error, r2_score
+from retroml_config import RetroMLConfig 
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -94,11 +192,11 @@ class RetroMLPipeline:
 ║  ██████╔╝█████╗     ██║   ██████╔╝██║   ██║██╔████╔██║██║    ║
 ║  ██╔══██╗██╔══╝     ██║   ██╔══██╗██║   ██║██║╚██╔╝██║██║    ║
 ║  ██║  ██║███████╗   ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║███████║
-║  ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
-║                                                                ║
-║            🎮 Your 90s-Style ML Assistant 🎮                  ║
-║                     v0.1.0 BETA                               ║      
-╚══════════════════════════════════════════════════════════════╝
+║  ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝═══║
+║                                                                  ║
+║               from Agile Creative Labs Inc.                      ║
+║                     v0.1.0 BETA                                  ║      
+╚══════════════════════════════════════════════════════════════════╝
         """
         if self.console:
             self.console.print(banner, style="bold cyan")
@@ -127,7 +225,7 @@ class RetroMLPipeline:
     
     def load_data(self):
         """Load dataset from file"""
-        self._retro_print(f"🎯 LOADING DATA FROM: {self.config.dataset_path}", "bold green")
+        self._retro_print(f"LOADING DATA FROM: {self.config.dataset_path}", "bold green")
         self._loading_animation("Reading dataset")
         
         try:
@@ -138,16 +236,16 @@ class RetroMLPipeline:
             else:
                 raise ValueError("Unsupported file format. Use CSV or JSON.")
                 
-            self._retro_print(f"✅ DATA LOADED! Shape: {self.data.shape}", "bold green")
-            self._retro_print(f"📊 Columns: {list(self.data.columns)}", "yellow")
+            self._retro_print(f"DATA LOADED! Shape: {self.data.shape}", "bold green")
+            self._retro_print(f"Columns: {list(self.data.columns)}", "yellow")
             
         except Exception as e:
-            self._retro_print(f"❌ ERROR LOADING DATA: {str(e)}", "bold red")
+            self._retro_print(f"ERROR LOADING DATA: {str(e)}", "bold red")
             sys.exit(1)
     
     def preprocess_data(self):
         """Preprocess the dataset"""
-        self._retro_print("🔧 PREPROCESSING DATA...", "bold magenta")
+        self._retro_print("PREPROCESSING DATA...", "bold magenta")
         
         # Separate features and target
         if self.config.target_column not in self.data.columns:
@@ -167,7 +265,7 @@ class RetroMLPipeline:
             strategy = self.config.preprocessing['impute_missing']
             imputer = SimpleImputer(strategy=strategy)
             X = pd.DataFrame(imputer.fit_transform(X), columns=X.columns)
-            self._retro_print(f"🔄 Missing values imputed using '{strategy}' strategy", "yellow")
+            self._retro_print(f"Missing values imputed using '{strategy}' strategy", "yellow")
         
         # Encode target for classification
         if self.config.problem_type == 'classification':
@@ -184,11 +282,11 @@ class RetroMLPipeline:
             self.scaler = StandardScaler()
             self.X_train = self.scaler.fit_transform(self.X_train)
             self.X_test = self.scaler.transform(self.X_test)
-            self._retro_print("📏 Features scaled using StandardScaler", "yellow")
+            self._retro_print("Features scaled using StandardScaler", "yellow")
         
-        self._retro_print(f"✅ PREPROCESSING COMPLETE!", "bold green")
-        self._retro_print(f"🎯 Training set: {self.X_train.shape}", "cyan")
-        self._retro_print(f"🎯 Test set: {self.X_test.shape}", "cyan")
+        self._retro_print(f"PREPROCESSING COMPLETE!", "bold green")
+        self._retro_print(f"Training set: {self.X_train.shape}", "cyan")
+        self._retro_print(f"Test set: {self.X_test.shape}", "cyan")
     
     def _get_default_models(self):
         """Get default models based on problem type"""
@@ -211,7 +309,7 @@ class RetroMLPipeline:
     
     def train_models(self):
         """Train and select the best model"""
-        self._retro_print("🚀 TRAINING MODELS...", "bold blue")
+        self._retro_print("TRAINING MODELS...", "bold blue")
         
         models = self._get_default_models()
         
@@ -231,7 +329,7 @@ class RetroMLPipeline:
                 
                 if self.config.problem_type == 'classification':
                     score = model.score(self.X_test, self.y_test)
-                    self._retro_print(f"📈 {name}: Accuracy = {score:.4f}", "green")
+                    self._retro_print(f"{name}: Accuracy = {score:.4f}", "green")
                     
                     if score > best_score:
                         best_score = score
@@ -240,7 +338,7 @@ class RetroMLPipeline:
                 else:
                     y_pred = model.predict(self.X_test)
                     score = mean_squared_error(self.y_test, y_pred)
-                    self._retro_print(f"📈 {name}: MSE = {score:.4f}", "green")
+                    self._retro_print(f"{name}: MSE = {score:.4f}", "green")
                     
                     if score < best_score:
                         best_score = score
@@ -248,14 +346,14 @@ class RetroMLPipeline:
                         self.best_model = model
                         
             except Exception as e:
-                self._retro_print(f"⚠️  {name} failed: {str(e)}", "red")
+                self._retro_print(f"⚠ {name} failed: {str(e)}", "red")
         
-        self._retro_print(f"🏆 BEST MODEL: {best_model_name.replace('_', ' ').title()}", "bold gold")
-        self._retro_print(f"🎯 Best Score: {best_score:.4f}", "bold gold")
+        self._retro_print(f" BEST MODEL: {best_model_name.replace('_', ' ').title()}", "bold gold")
+        self._retro_print(f"Best Score: {best_score:.4f}", "bold gold")
     
     def evaluate_model(self):
         """Evaluate the best model and generate reports"""
-        self._retro_print("📊 GENERATING EVALUATION REPORT...", "bold cyan")
+        self._retro_print(" GENERATING EVALUATION REPORT...", "bold cyan")
         
         y_pred = self.best_model.predict(self.X_test)
         
@@ -283,11 +381,11 @@ class RetroMLPipeline:
                 f.write(f"Mean Squared Error: {mse:.4f}\n")
                 f.write(f"R² Score: {r2:.4f}\n")
         
-        self._retro_print(f"📋 Report saved to: {report_path}", "green")
+        self._retro_print(f"Report saved to: {report_path}", "green")
     
     def save_model(self):
         """Save the trained model"""
-        self._retro_print("💾 SAVING MODEL...", "bold yellow")
+        self._retro_print("SAVING MODEL...", "bold yellow")
         
         model_path = os.path.join(self.config.output['save_dir'], 'best_model.pkl')
         
@@ -301,12 +399,12 @@ class RetroMLPipeline:
         with open(model_path, 'wb') as f:
             pickle.dump(model_package, f)
         
-        self._retro_print(f"✅ Model saved to: {model_path}", "bold green")
+        self._retro_print(f"Model saved to: {model_path}", "bold green")
     
     def run_pipeline(self):
         """Run the complete ML pipeline"""
         self._print_ascii_banner()
-        self._retro_print("🎮 INITIALIZING RETROML PIPELINE...", "bold cyan")
+        self._retro_print("INITIALIZING RETROML PIPELINE...", "bold cyan")
         
         try:
             self.load_data()
@@ -315,10 +413,10 @@ class RetroMLPipeline:
             self.evaluate_model()
             self.save_model()
             
-            self._retro_print("🎉 PIPELINE COMPLETE! RADICAL! 🎉", "bold green")
+            self._retro_print("PIPELINE COMPLETE! RADICAL! ", "bold green")
             
         except Exception as e:
-            self._retro_print(f"💥 PIPELINE FAILED: {str(e)}", "bold red")
+            self._retro_print(f"PIPELINE FAILED: {str(e)}", "bold red")
             sys.exit(1)
 
 def main():
