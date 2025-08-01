@@ -1,4 +1,4 @@
-# RetroML - 90s-Style Automated Machine Learning
+# RetroML 
 
 Welcome to RetroML! A nostalgic, configuration-driven ML pipeline that brings the radical vibes of the 90s to modern machine learning.
 
