@@ -38,11 +38,11 @@ The included classification demo specifically demonstrates:
   ```bash
     python3 retroml_model_analyzer.py
   ```    
-3. **Ensure that you flask installed**
+3. **Ensure that you have flask installed**
     ```bash
       pip install flask
     ```    
-4. **Launch the web application**
+4. **Launch the demo web application**
   ```bash
     python3 retroml_web_demo.py
   ```
